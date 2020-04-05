@@ -16,6 +16,10 @@ import json
 #news cryptos from messari
 #sentiment or prediction
 
+# Initialize a Flask app to host the events adapter
+app = Flask(__name__)
+slack_events_adapter = SlackEventAdapter(os.environ['SLACK_SIGNING_SECRET'], "/slack/events", app)
+
 client_id = os.environ["SLACK_CLIENT_ID"]
 client_secret = os.environ["SLACK_CLIENT_SECRET"]
 oauth_scope = ", ".join(["chat:write", "channels:read", "channels:join", "app_mentions:read", "chat:write.customize", "im:history"])
@@ -102,9 +106,7 @@ def get_news():
 
 
 
-# Initialize a Flask app to host the events adapter
-app = Flask(__name__)
-slack_events_adapter = SlackEventAdapter(os.environ['SLACK_SIGNING_SECRET'], "/slack/events", app)
+
 
 # Initialize a Web API client
 slack_web_client = WebClient(token=os.environ['SLACK_BOT_TOKEN'])
