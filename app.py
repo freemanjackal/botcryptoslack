@@ -29,19 +29,19 @@ def pre_install():
 @app.route("/finish_auth", methods=["GET", "POST"])
 def post_install():
   # Retrieve the auth code from the request params
-    auth_code = request.args['code']
+	auth_code = request.args['code']
 
   # An empty string is a valid token for this request
-    client = slack.WebClient(token="")
+	client = slack.WebClient(token="")
 
   # Request the auth tokens from Slack
-    response = client.oauth_v2_access(
-        client_id=os.environ["CLIENT_ID"],
-        client_secret=os.environ["CLIENT_SECRET"],
-        code=auth_code
-    )
+	response = client.oauth_v2_access(
+		client_id=os.environ["CLIENT_ID"],
+		client_secret=os.environ["CLIENT_SECRET"],
+		code=auth_code
+	)
 
- 	# Save the bot token to an environmental variable or to your data store
+	# Save the bot token to an environmental variable or to your data store
 	# for later use
 	os.environ["SLACK_BOT_TOKEN"] = response['access_token']
 
