@@ -18,7 +18,7 @@ import json
 
 headers = {
 	  'Accepts': 'application/json',
-	  'X-CMC_PRO_API_KEY': os.environ('APP_KEY_COINM_API'),
+	  'X-CMC_PRO_API_KEY': os.environ['APP_KEY_COINM_API'],
 	}
 
 def get_latest_prices():
