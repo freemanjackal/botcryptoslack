@@ -27,8 +27,7 @@ oauth_scope = ", ".join(["chat:write", "channels:read", "channels:join", "app_me
 #auth request
 @app.route("/begin_auth", methods=["GET"])
 def pre_install():
-	return f'<a href="https://slack.com/oauth/v2/authorize?scope={ oauth_scope }&client_id={ client_id }">Add to Slack</a>'
-
+	return f'<a href="https://slack.com/oauth/v2/authorize?client_id=1034315777795.1044752003316&scope=chat:write,channels:join,commands,im:history,app_mentions:read,channels:history&redirect_uri=https://botcryptoslack.herokuapp.com/finish_auth"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"></a>'
 
 @app.route("/finish_auth", methods=["GET", "POST"])
 def post_install():
@@ -36,7 +35,7 @@ def post_install():
 	auth_code = request.args['code']
 
   # An empty string is a valid token for this request
-	client = slack.WebClient(token="")
+	client = WebClient(token="")
 
   # Request the auth tokens from Slack
 	response = client.oauth_v2_access(
@@ -108,11 +107,12 @@ def get_news():
 
 
 
-# Initialize a Web API client
-slack_web_client = WebClient(token=os.environ['SLACK_BOT_TOKEN'])
+
 
 
 def start(user_id: str, channel: str, msg):
+	# Initialize a Web API client
+	slack_web_client = WebClient(token=os.environ['SLACK_BOT_TOKEN'])
 
 	if msg["type"] == "block":
 		response = slack_web_client.chat_postMessage(channel=channel,user=user_id, blocks=msg["text"])	
