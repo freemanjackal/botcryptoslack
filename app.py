@@ -28,7 +28,7 @@ oauth_scope = ", ".join(["chat:write", "channels:read", "channels:join", "app_me
 
 @app.route("/begin_auth", methods=["GET"])
 def pre_install():
-	return f'<a href="https://slack.com/oauth/v2/authorize?client_id=1034315777795.1044752003316&scope=chat:write,channels:join,commands,im:history,app_mentions:read,channels:history&redirect_uri=https://botcryptoslack.herokuapp.com/finish_auth"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"></a>'
+	return f'<a href="https://slack.com/oauth/v2/authorize?client_id=1034315777795.1044752003316&scope=chat:write,channels:join,commands,im:history,app_mentions:read,channels:history"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"></a>'
 
 @app.route("/finish_auth", methods=["GET", "POST"])
 def post_install():
@@ -50,6 +50,8 @@ def post_install():
 	# Save the bot token to an environmental variable or to your data store
 	# for later use
 	os.environ["SLACK_BOT_TOKEN"] = response['access_token']
+	print("access token")
+	print(response['access_token'])
 
 	# Don't forget to let the user know that auth has succeeded!
 	return "Auth complete!"
