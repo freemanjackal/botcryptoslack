@@ -273,6 +273,7 @@ def message(payload):
 
 if __name__ == "__main__":
 	logger = logging.getLogger()
+	os.environ['DATABASE_URL'] = 'localhost:5432@postgres'
 	logger.setLevel(logging.DEBUG)
 	logger.addHandler(logging.StreamHandler())
 	ssl_context = ssl_lib.create_default_context(cafile=certifi.where())
