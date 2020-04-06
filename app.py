@@ -39,8 +39,8 @@ def post_install():
 
   # Request the auth tokens from Slack
 	response = client.oauth_v2_access(
-		client_id=os.environ["CLIENT_ID"],
-		client_secret=os.environ["CLIENT_SECRET"],
+		client_id=os.environ["SLACK_CLIENT_ID"],
+		client_secret=os.environ["SLACK_CLIENT_SECRET"],
 		code=auth_code
 	)
 
