@@ -54,11 +54,12 @@ def post_install():
 	# Don't forget to let the user know that auth has succeeded!
 	return "Auth complete!"
 
-
+The server responded with: {'ok': False, 'error': 'bad_redirect_uri', 'warning': 'superfluous_charset', 'response_metadata': {'warnings': ['superfluous_charset']}}
 
 headers = {
 	  'Accepts': 'application/json',
 	  'X-CMC_PRO_API_KEY': os.environ['APP_KEY_COINM_API'],
+	  'Content-Type': 'application/json'
 	}
 
 def get_latest_prices():
@@ -116,6 +117,9 @@ def get_news():
 def start(user_id: str, channel: str, msg):
 	# Initialize a Web API client
 	slack_web_client = WebClient(token=os.environ['SLACK_BOT_TOKEN'])
+	print(os.environ['SLACK_BOT_TOKEN'])
+	print(channel)
+	print(user_id)
 
 	if msg["type"] == "block":
 		response = slack_web_client.chat_postMessage(channel=channel,user=user_id, blocks=msg["text"])	
