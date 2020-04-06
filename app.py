@@ -227,11 +227,10 @@ def message(payload):
 	channel_id = event.get("channel")
 	user_id = event.get("user")
 	text = event.get("text")
-	print("entra")
-	print(team_id)
-	print(text)
-	print(user_id)
 	text = text.split()
+	msgs(text, team_id, user_id, channel_id)
+
+def msgs(text, team_id, user_id, channel_id):
 	if text and text[1].lower() == "prices":
 		data = get_latest_prices()
 		text = convertPrices2Msgs(data)
@@ -273,6 +272,19 @@ def message(payload):
 		msg["text"] = text
 		return start(team_id, user_id, channel_id, msg)
 
+
+@slack_events_adapter.on("message")
+def message_priv(payload):
+	event = payload.get("event", {})
+
+	if event.get("channel_type") == "im":
+		team_id = payload.get("team_id")
+		channel_id = event.get("channel")
+		user_id = event.get("user")
+		text = event.get("text")
+		text = text.split()
+		msgs(text, team_id, user_id, channel_id)
+		
 
 if __name__ == "__main__":
 	logger = logging.getLogger()
