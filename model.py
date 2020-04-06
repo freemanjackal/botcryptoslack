@@ -18,8 +18,12 @@ def init_db():
 	print("database created succesfully")
 
 def insert_token(team_id, token):
-	db.session.add(Token(team_id=team_id, token=token))
-	db.session.commit()
+	try:
+		db.session.add(Token(team_id=team_id, token=token))
+		db.session.commit()
+	except:
+		db.session.rollback()
+
 
 def get_token(team_id):
 	tokens = db.session.query(Token).filter(Token.team_id==team_id)
