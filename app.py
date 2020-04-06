@@ -25,6 +25,8 @@ client_secret = os.environ["SLACK_CLIENT_SECRET"]
 oauth_scope = ", ".join(["chat:write", "channels:read", "channels:join", "app_mentions:read", "chat:write.customize", "im:history"])
 
 #auth request
+http://5d91fe32.ngrok.io
+events
 @app.route("/begin_auth", methods=["GET"])
 def pre_install():
 	return f'<a href="https://slack.com/oauth/v2/authorize?client_id=1034315777795.1044752003316&scope=chat:write,channels:join,commands,im:history,app_mentions:read,channels:history&redirect_uri=https://botcryptoslack.herokuapp.com/finish_auth"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"></a>'
@@ -36,6 +38,8 @@ def post_install():
 
   # An empty string is a valid token for this request
 	client = WebClient(token="")
+	print(os.environ["SLACK_CLIENT_ID"])
+	print(os.environ["SLACK_CLIENT_SECRET"])
 
   # Request the auth tokens from Slack
 	response = client.oauth_v2_access(
