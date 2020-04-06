@@ -60,6 +60,7 @@ def post_install():
 	print("team id")
 	print(response['team_id'])
 	print(response['team_name'])
+	print(response["team"]["id"])
 	tokens[response['team_id']] = response['access_token']
 
 	# Don't forget to let the user know that auth has succeeded!
