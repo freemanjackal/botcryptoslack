@@ -231,6 +231,8 @@ def message(payload):
 	"""
 	event = payload.get("event", {})
 
+	print(payload.get("team_id"))
+
 	channel_id = event.get("channel")
 	user_id = event.get("user")
 	text = event.get("text")
