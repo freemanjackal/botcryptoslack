@@ -125,10 +125,10 @@ def get_news():
 
 
 
-def start(user_id: str, channel: str, msg):
+def start(team_id: str, user_id: str, channel: str, msg):
 	# Initialize a Web API client
 	#slack_web_client = WebClient(token=os.environ['SLACK_BOT_TOKEN'])
-	slack_web_client = WebClient(tokens[channel])
+	slack_web_client = WebClient(tokens[team_id])
 	print("start funcion")
 	print(tokens[channel])
 	print(channel)
@@ -231,7 +231,7 @@ def message(payload):
 	"""
 	event = payload.get("event", {})
 
-	print(payload.get("team_id"))
+	team_id = payload.get("team_id")
 
 	channel_id = event.get("channel")
 	user_id = event.get("user")
@@ -257,27 +257,27 @@ def message(payload):
 		msg = {}
 		msg["type"] = "block"
 		msg["text"] = text
-		return start(user_id, channel_id, msg)
+		return start(team_id, user_id, channel_id, msg)
 	if text and text[1].lower() == "news":
 		data = get_news()
 		text = convertNews2Msgs(data)
 		msg = {}
 		msg["type"] = "block"
 		msg["text"] = text
-		return start(user_id, channel_id, msg)
+		return start(team_id, user_id, channel_id, msg)
 	if text and text[1].lower() == "prediction":
 		text = prediction()
 		msg = {}
 		msg["type"] = "block"
 		msg["text"] = text
-		return start(user_id, channel_id, msg)
+		return start(team_id, user_id, channel_id, msg)
 
 	if text and text[1].lower() == "help":
 		text = help()
 		msg = {}
 		msg["type"] = "block"
 		msg["text"] = text
-		return start(user_id, channel_id, msg)
+		return start(team_id, user_id, channel_id, msg)
 
 
 if __name__ == "__main__":
