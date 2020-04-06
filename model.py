@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///tokens.sqlite"
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
+#app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 db = SQLAlchemy(app)
 
 
@@ -15,6 +15,7 @@ class Token(db.Model):
 
 def init_db():
 	db.create_all()
+	print("database created succesfully")
 
 def insert_token(team_id, token):
 	db.session.add(Token(team_id=team_id, token=token))
