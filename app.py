@@ -61,7 +61,7 @@ def post_install():
 	print(response['team_id'])
 	print(response['team_name'])
 	print(response["team"]["id"])
-	tokens[response['team_id']] = response['access_token']
+	tokens[response['team']["id"]] = response['access_token']
 
 	# Don't forget to let the user know that auth has succeeded!
 	return "Auth complete!"
