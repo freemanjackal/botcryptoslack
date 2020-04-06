@@ -38,7 +38,7 @@ def pre_install():
 @app.route("/finish_auth", methods=["GET", "POST"])
 def post_install():
   # Retrieve the auth code from the request params
-  	global tokens
+	global tokens
 	auth_code = request.args['code']
 
   # An empty string is a valid token for this request
