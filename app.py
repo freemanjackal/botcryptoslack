@@ -64,6 +64,8 @@ def post_install():
 	print(response["team"]["id"])
 	tokens[response['team']["id"]] = response['access_token']
 
+	print(tokens)
+
 	# Don't forget to let the user know that auth has succeeded!
 	return "Auth complete!"
 
@@ -129,6 +131,7 @@ def get_news():
 def start(team_id: str, user_id: str, channel: str, msg):
 	# Initialize a Web API client
 	#slack_web_client = WebClient(token=os.environ['SLACK_BOT_TOKEN'])
+	print(tokens)
 	slack_web_client = WebClient(tokens[team_id])
 	print("start funcion")
 	#print(tokens[channel])
