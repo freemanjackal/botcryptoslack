@@ -54,7 +54,6 @@ def post_install():
 	# Don't forget to let the user know that auth has succeeded!
 	return "Auth complete!"
 
-The server responded with: {'ok': False, 'error': 'bad_redirect_uri', 'warning': 'superfluous_charset', 'response_metadata': {'warnings': ['superfluous_charset']}}
 
 headers = {
 	  'Accepts': 'application/json',
