@@ -38,6 +38,7 @@ def pre_install():
 @app.route("/finish_auth", methods=["GET", "POST"])
 def post_install():
   # Retrieve the auth code from the request params
+  	global tokens
 	auth_code = request.args['code']
 
   # An empty string is a valid token for this request
@@ -58,8 +59,8 @@ def post_install():
 	print("access token")
 	print(response['access_token'])
 	print("team id")
-	print(response['team_id'])
-	print(response['team_name'])
+	#print(response['team_id'])
+	#print(response['team_name'])
 	print(response["team"]["id"])
 	tokens[response['team']["id"]] = response['access_token']
 
@@ -130,9 +131,9 @@ def start(team_id: str, user_id: str, channel: str, msg):
 	#slack_web_client = WebClient(token=os.environ['SLACK_BOT_TOKEN'])
 	slack_web_client = WebClient(tokens[team_id])
 	print("start funcion")
-	print(tokens[channel])
-	print(channel)
-	print(user_id)
+	#print(tokens[channel])
+	#print(channel)
+	#print(user_id)
 
 	if msg["type"] == "block":
 		response = slack_web_client.chat_postMessage(channel=channel,user=user_id, blocks=msg["text"])	
