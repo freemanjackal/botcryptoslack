@@ -9,6 +9,7 @@ import certifi
 from requests import Request, Session
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import json
+import model
 #coinmarketcap api
 
 #price convertions
@@ -43,8 +44,6 @@ def post_install():
 
   # An empty string is a valid token for this request
 	client = WebClient(token="")
-	print(os.environ["SLACK_CLIENT_ID"])
-	print(os.environ["SLACK_CLIENT_SECRET"])
 
   # Request the auth tokens from Slack
 	response = client.oauth_v2_access(
@@ -55,16 +54,9 @@ def post_install():
 
 	# Save the bot token to an environmental variable or to your data store
 	# for later use
-	#os.environ["SLACK_BOT_TOKEN"] = response['access_token']
-	print("access token")
-	print(response['access_token'])
-	print("team id")
-	#print(response['team_id'])
-	#print(response['team_name'])
-	print(response["team"]["id"])
-	tokens[response['team']["id"]] = response['access_token']
+	model.insert_token(response['team']["id"], response['access_token'])
+	#tokens[response['team']["id"]] = response['access_token']
 
-	print(tokens)
 
 	# Don't forget to let the user know that auth has succeeded!
 	return "Auth complete!"
@@ -131,12 +123,8 @@ def get_news():
 def start(team_id: str, user_id: str, channel: str, msg):
 	# Initialize a Web API client
 	#slack_web_client = WebClient(token=os.environ['SLACK_BOT_TOKEN'])
-	print(tokens)
-	slack_web_client = WebClient(tokens[team_id])
-	print("start funcion")
-	#print(tokens[channel])
-	#print(channel)
-	#print(user_id)
+	token = model.get_token(team_id)
+	slack_web_client = WebClient(token)
 
 	if msg["type"] == "block":
 		response = slack_web_client.chat_postMessage(channel=channel,user=user_id, blocks=msg["text"])	
@@ -178,7 +166,6 @@ def convertCryptoSell2Msgs(data):
 	return sections
 
 def convertNews2Msgs(data):
-	#data = json.loads(data)
 	data = data['data']
 	sections = []
 
@@ -248,7 +235,7 @@ def message(payload):
 		msg = {}
 		msg["type"] = "block"
 		msg["text"] = text
-		return start(user_id, channel_id, msg)
+		return start(team_id, user_id, channel_id, msg)
 
 	if text and text[1].lower() == "convert":
 		if len(text) == 4:
