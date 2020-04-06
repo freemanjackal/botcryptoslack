@@ -65,8 +65,28 @@ def handle_command(command, channel):
         text=response or default_response
     )
 
+# ============== Message Events ============= #
+# When a user sends a DM, the event type will be 'message'.
+# Here we'll link the message callback to the 'message' event.
+@slack_events_adapter.on("message")
+def message(payload):
+    """Display the onboarding welcome message after receiving a message
+    that contains "start".
+    """
+    event = payload.get("event", {})
+
+    channel_id = event.get("channel")
+    user_id = event.get("user")
+    text = event.get("text")
+
+
+    if text and text.lower() == "start":
+        return start_onboarding(user_id, channel_id)
+
+
+
 if __name__ == "__main__":
-    if slack_client.rtm_connect(with_team_state=False):
+    if slack_client:
         print("Starter Bot connected and running!")
         # Read bot's user ID by calling Web API method `auth.test`
         starterbot_id = slack_client.api_call("auth.test")["user_id"]

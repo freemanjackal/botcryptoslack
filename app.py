@@ -20,6 +20,11 @@ import json
 app = Flask(__name__)
 slack_events_adapter = SlackEventAdapter(os.environ['SLACK_SIGNING_SECRET'], "/slack/events", app)
 
+
+#dictionary to memory save tokens
+tokens = {}
+
+
 client_id = os.environ["SLACK_CLIENT_ID"]
 client_secret = os.environ["SLACK_CLIENT_SECRET"]
 oauth_scope = ", ".join(["chat:write", "channels:read", "channels:join", "app_mentions:read", "chat:write.customize", "im:history"])
@@ -49,9 +54,13 @@ def post_install():
 
 	# Save the bot token to an environmental variable or to your data store
 	# for later use
-	os.environ["SLACK_BOT_TOKEN"] = response['access_token']
+	#os.environ["SLACK_BOT_TOKEN"] = response['access_token']
 	print("access token")
 	print(response['access_token'])
+	print("team id")
+	print(response['team_id'])
+	print(response['team_name'])
+	tokens[response['team_id']] = response['access_token']
 
 	# Don't forget to let the user know that auth has succeeded!
 	return "Auth complete!"
@@ -117,8 +126,10 @@ def get_news():
 
 def start(user_id: str, channel: str, msg):
 	# Initialize a Web API client
-	slack_web_client = WebClient(token=os.environ['SLACK_BOT_TOKEN'])
-	print(os.environ['SLACK_BOT_TOKEN'])
+	#slack_web_client = WebClient(token=os.environ['SLACK_BOT_TOKEN'])
+	slack_web_client = WebClient(tokens[channel])
+	print("start funcion")
+	print(tokens[channel])
 	print(channel)
 	print(user_id)
 
