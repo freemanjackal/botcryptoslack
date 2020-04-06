@@ -2,8 +2,8 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///tokens.sqlite"
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql:///postgresql-cubed-34952"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
 
@@ -21,8 +21,9 @@ def insert_token(team_id, token):
 	try:
 		db.session.add(Token(team_id=team_id, token=token))
 		db.session.commit()
-	except:
+	except Exception as e:
 		db.session.rollback()
+		print(e)
 
 
 def get_token(team_id):
