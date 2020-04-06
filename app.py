@@ -227,7 +227,10 @@ def message(payload):
 	channel_id = event.get("channel")
 	user_id = event.get("user")
 	text = event.get("text")
-
+	print("entra")
+	print(team_id)
+	print(text)
+	print(user_id)
 	text = text.split()
 	if text and text[1].lower() == "prices":
 		data = get_latest_prices()
