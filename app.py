@@ -69,9 +69,17 @@ slash commands functions
 def slash_commands():
 	print("entra aqui")
 	text = request.args['text']
+	print("entra aqui")
+
 	team_id = request.args['team_id']
+	print("entra aqui")
+
 	channel = request.args['channel_id']
+	print("entra aqui")
+
 	user_id = request.args['user_id']
+	print("entra aqui")
+	
 	command = request.args['command']
 
 	print(command)
