@@ -67,10 +67,12 @@ slash commands functions
 
 @app.route("/slash_commands", methods=["GET", "POST"])
 def slash_commands():
-	print("entra aqui")
+	print("sii")
+	arguments = request.get_json()
+	print(arguments)
 	try:
 		text = request.args['text']
-	except:
+	except :
 		print("entra text error")
 	try:
 		team_id = request.args['team_id']
