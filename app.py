@@ -209,6 +209,9 @@ def help():
 	blocks = _get_block( "Get crypto prediction", "Coming soon...")
 	sections.append(blocks[0])
 	sections.append(blocks[1])
+	blocks = _get_block( "Slack commands", "Coming soon...")
+	sections.append(blocks[0])
+	sections.append(blocks[1])
 	sections.append(DIVIDER_BLOCK)
 	return sections	
 
@@ -284,7 +287,7 @@ def message_priv(payload):
 		text = event.get("text")
 		text = text.split()
 		msgs(text, team_id, user_id, channel_id)
-		
+
 
 if __name__ == "__main__":
 	logger = logging.getLogger()
