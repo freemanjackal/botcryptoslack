@@ -64,6 +64,7 @@ def post_install():
 """
 slash commands functions
 """
+
 @app.route("/slash_commands", methods=["GET", "POST"])
 def slash_commands():
 	text = request.args['text']
@@ -75,7 +76,7 @@ def slash_commands():
 	print(command)
 	print(channel)
 	print(text)
-	
+
 	text = text.split()
 
 	if command == "/crypto_prices":
