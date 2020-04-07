@@ -4,7 +4,7 @@ This is a slack bot that provide specific information about crypto markets.
 ## Functionalities
 * Get the latest prices of 5 cryptocurrencies (BTC, ETH, LTC, BCH,  XTZ)
 * Get news related to crypto market
-* Make conversion of a specific amount of any cryptocurrency(listed in [coinmarketcap](https://coinmarketcap.com) to USD.
+* Make conversion of a specific amount of any cryptocurrency(listed in [coinmarketcap](https://coinmarketcap.com)) to USD.
 
 ## Crypto bot commands
 The commands used by cryptobot are not slack commands. They work by mentioning the bot followed by specific keywords.
