@@ -67,9 +67,10 @@ slash commands functions
 
 @app.route("/slash_commands", methods=["GET", "POST"])
 def slash_commands():
+	print("entra aqui")
 	text = request.args['text']
 	team_id = request.args['team_id']
-	channel = request.args['channel']
+	channel = request.args['channel_id']
 	user_id = request.args['user_id']
 	command = request.args['command']
 
