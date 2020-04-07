@@ -68,8 +68,13 @@ slash commands functions
 @app.route("/slash_commands", methods=["GET", "POST"])
 def slash_commands():
 	print("sii")
-	arguments = request.get_json()
+	arguments = request.get_json(force=True)
 	print(arguments)
+	fr = request.form.get('command')
+	print(fr)
+	va = request.values
+	print(va)
+
 	try:
 		text = request.args['text']
 	except :
