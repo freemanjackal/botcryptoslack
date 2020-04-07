@@ -72,9 +72,13 @@ def slash_commands():
 	user_id = request.args['user_id']
 	command = request.args['command']
 
+	print(command)
+	print(channel)
+	print(text)
+	
 	text = text.split()
 
-	if text and text[1].lower() == "/crypto_prices":
+	if command == "/crypto_prices":
 		data = get_latest_prices()
 		text = convertPrices2Msgs(data)
 		msg = {}
