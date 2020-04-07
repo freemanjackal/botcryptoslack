@@ -66,15 +66,15 @@ slash commands functions
 """
 @app.route("/slash_commands", methods=["GET", "POST"])
 def slash_commands():
-	 text = request.args['text']
-	 team_id = request.args['team_id']
-	 channel = request.args['channel']
-	 user_id = request.args['user_id']
-	 command = request.args['command']
+	text = request.args['text']
+	team_id = request.args['team_id']
+	channel = request.args['channel']
+	user_id = request.args['user_id']
+	command = request.args['command']
 
-	 text = text.split()
+	text = text.split()
 
-	 if text and text[1].lower() == "/crypto_prices":
+	if text and text[1].lower() == "/crypto_prices":
 		data = get_latest_prices()
 		text = convertPrices2Msgs(data)
 		msg = {}
@@ -115,8 +115,8 @@ def slash_commands():
 		msg["text"] = text
 		return start(team_id, user_id, channel_id, msg)
 	 
-	 	text = comand + " " + text
-	 	msgs(text, team_id,  user_id, channel)
+		text = comand + " " + text
+		msgs(text, team_id,  user_id, channel)
 	
 
 
