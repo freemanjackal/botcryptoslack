@@ -61,6 +61,64 @@ def post_install():
 	# Don't forget to let the user know that auth has succeeded!
 	return "Authorization complete!"
 
+"""
+slash commands functions
+"""
+@app.route("/slash_commands", methods=["GET", "POST"])
+def slash_commands():
+	 text = request.args['text']
+	 team_id = request.args['team_id']
+	 channel = request.args['channel']
+	 user_id = request.args['user_id']
+	 command = request.args['command']
+
+	 text = text.split()
+
+	 if text and text[1].lower() == "/crypto_prices":
+		data = get_latest_prices()
+		text = convertPrices2Msgs(data)
+		msg = {}
+		msg["type"] = "block"
+		msg["text"] = text
+		return start(team_id, user_id, channel_id, msg)
+
+	if command == "/crypto_convert":
+		if len(text) == 2:
+			crypto = text[1].lower()
+			data = convert_to(float(text[0]),crypto=crypto)
+		else:
+			data = convert_to(float(text[0]))
+
+		text = convertCryptoSell2Msgs(data)
+		msg = {}
+		msg["type"] = "block"
+		msg["text"] = text
+		return start(team_id, user_id, channel_id, msg)
+	if command == "/crypto_news":
+		data = get_news()
+		text = convertNews2Msgs(data)
+		msg = {}
+		msg["type"] = "block"
+		msg["text"] = text
+		return start(team_id, user_id, channel_id, msg)
+	if command == "/crypto_prediction":
+		text = prediction()
+		msg = {}
+		msg["type"] = "block"
+		msg["text"] = text
+		return start(team_id, user_id, channel_id, msg)
+
+	if command == "/crypto_bot_help":
+		text = help()
+		msg = {}
+		msg["type"] = "block"
+		msg["text"] = text
+		return start(team_id, user_id, channel_id, msg)
+	 
+	 	text = comand + " " + text
+	 	msgs(text, team_id,  user_id, channel)
+	
+
 
 headers = {
 	  'Accepts': 'application/json',
