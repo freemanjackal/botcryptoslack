@@ -1,4 +1,14 @@
 # Deployment guide
+## Public Distribution of this app
+
+### Add the slack bot to any slack workspace
+Go to this link to add it
+https://botcryptoslack.herokuapp.com/begin_auth
+
+<a href="https://slack.com/oauth/v2/authorize?client_id=1034315777795.1044752003316&scope=chat:write,channels:join,commands,im:history,im:write,app_mentions:read,channels:history"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"></a>
+### Include this html link in any website
+    <a href="https://slack.com/oauth/v2/authorize?client_id=1034315777795.1044752003316&scope=chat:write,channels:join,commands,im:history,im:write,app_mentions:read,channels:history"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"></a>
+
 ## Technology stack
 * Python
 * Flask: python framework
@@ -11,21 +21,12 @@
 ## To create your slack app follow this link
 https://api.slack.com/bot-users
 
-## Public Distribution of the app
-
-### Add the slack bot to any slack workspace
-Go to this link to add it
-https://botcryptoslack.herokuapp.com/begin_auth
-
-<a href="https://slack.com/oauth/v2/authorize?client_id=1034315777795.1044752003316&scope=chat:write,channels:join,commands,im:history,im:write,app_mentions:read,channels:history"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"></a>
-### Include this html link in any website
-    <a href="https://slack.com/oauth/v2/authorize?client_id=1034315777795.1044752003316&scope=chat:write,channels:join,commands,im:history,im:write,app_mentions:read,channels:history"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"></a>
 
 ## Deploy bot on heroku infrastructure
 
-create your own project or clone/fork this repo
+Create your own project or clone/fork this repo
 
-Install the Heroku CLI used to deploy to heroku
+Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install) used to deploy to heroku https://devcenter.heroku.com/articles/heroku-cli#download-and-install
 
 You can create yor heroku app and pipeline in https://heroku.com. If you want to create your heroku app using the cli-command follow this link https://devcenter.heroku.com/articles/git.
 
@@ -43,9 +44,11 @@ To link your heroku app with your local git repo use this command
 Be sure to change [heroku_app] with the name of your heroku app.
 
 ### Deploying cli-command
-git push heroku master
-This command will deploy to heroku the project. For python heroku use the requirements.txt to install needed dependencies. So in case you install new python 
-dependencies run pip freeze > requirements.txt to update it with your latest dependencies.
+    git push heroku master
+This command will deploy the project to heroku. For python, heroku use the requirements.txt to install the needed dependencies. So in case you install new python dependencies run:
+
+    pip freeze > requirements.txt
+to update it with your latest dependencies.
 
 Once this is done there is one more step to follow if you forked/cloned this repo. Create the database in postgreSql in heroku with this command.
 
