@@ -67,8 +67,9 @@ slash commands functions
 
 @app.route("/slash_commands", methods=["GET", "POST"])
 def slash_commands():
+
 	print("sii")
-	arguments = request.get_json(force=True)
+	arguments = request.get_json()
 	print(arguments)
 	fr = request.form.get('command')
 	print(fr)
