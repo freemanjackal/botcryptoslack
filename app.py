@@ -85,7 +85,7 @@ def slash_commands():
 	except:
 		print("entra team e")
 	try:
-		channel = request.form.get('channel_id')
+		channel_id = request.form.get('channel_id')
 	except:
 		print("entra  channel aqui")
 	try:
