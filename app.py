@@ -77,23 +77,23 @@ def slash_commands():
 	print(va)
 
 	try:
-		text = request.args['text']
+		text = request.form.get('text')
 	except :
 		print("entra text error")
 	try:
-		team_id = request.args['team_id']
+		team_id = request.form.get('team_id')
 	except:
 		print("entra team e")
 	try:
-		channel = request.args['channel_id']
+		channel = request.form.get('channel_id')
 	except:
 		print("entra  channel aqui")
 	try:
-		user_id = request.args['user_id']
+		user_id = request.form.get('user_id')
 	except:
 		print("entra aqui")
 	try:
-		command = request.args['command']
+		command = request.form.get('command')
 	except:
 		print("command e")
 
