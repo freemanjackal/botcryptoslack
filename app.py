@@ -102,7 +102,7 @@ def slash_commands():
 		msg = {}
 		msg["type"] = "block"
 		msg["text"] = text
-		return start(team_id, user_id, channel_id, msg)
+		start(team_id, user_id, channel_id, msg)
 
 	if command == "/crypto_convert":
 		if len(text) == 2:
@@ -115,30 +115,30 @@ def slash_commands():
 		msg = {}
 		msg["type"] = "block"
 		msg["text"] = text
-		return start(team_id, user_id, channel_id, msg)
+		start(team_id, user_id, channel_id, msg)
 	if command == "/crypto_news":
 		data = get_news()
 		text = convertNews2Msgs(data)
 		msg = {}
 		msg["type"] = "block"
 		msg["text"] = text
-		return start(team_id, user_id, channel_id, msg)
+		start(team_id, user_id, channel_id, msg)
 	if command == "/crypto_prediction":
 		text = prediction()
 		msg = {}
 		msg["type"] = "block"
 		msg["text"] = text
-		return start(team_id, user_id, channel_id, msg)
+		start(team_id, user_id, channel_id, msg)
 
 	if command == "/crypto_bot_help":
 		text = help()
 		msg = {}
 		msg["type"] = "block"
 		msg["text"] = text
-		return start(team_id, user_id, channel_id, msg)
+		start(team_id, user_id, channel_id, msg)
 	 
-		text = comand + " " + text
-		msgs(text, team_id,  user_id, channel)
+		
+
 	return "success"
 	
 
