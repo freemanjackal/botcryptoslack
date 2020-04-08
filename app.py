@@ -139,6 +139,7 @@ def slash_commands():
 	 
 		text = comand + " " + text
 		msgs(text, team_id,  user_id, channel)
+	return "success"
 	
 
 
