@@ -115,7 +115,7 @@ def slash_commands():
 		msg = {}
 		msg["type"] = "block"
 		msg["text"] = text
-		return text
+		return {'blocks':text}
 		start(team_id, user_id, channel_id, msg)
 	if command == "/crypto_news":
 		data = get_news()
