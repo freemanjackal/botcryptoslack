@@ -99,10 +99,12 @@ def slash_commands():
 	if command == "/crypto_prices":
 		data = get_latest_prices()
 		text = convertPrices2Msgs(data)
-		msg = {}
-		msg["type"] = "block"
-		msg["text"] = text
-		start(team_id, user_id, channel_id, msg)
+		return {'blocks': text}
+
+		#msg = {}
+		#msg["type"] = "block"
+		#msg["text"] = text
+		#start(team_id, user_id, channel_id, msg)
 
 	if command == "/crypto_convert":
 		if len(text) == 2:
@@ -112,30 +114,34 @@ def slash_commands():
 			data = convert_to(float(text[0]))
 
 		text = convertCryptoSell2Msgs(data)
-		msg = {}
-		msg["type"] = "block"
-		msg["text"] = text
+		#msg = {}
+		#msg["type"] = "block"
+		#msg["text"] = text
 		return {'blocks':text}
-		start(team_id, user_id, channel_id, msg)
+		#start(team_id, user_id, channel_id, msg)
 	if command == "/crypto_news":
 		data = get_news()
 		text = convertNews2Msgs(data)
-		msg = {}
-		msg["type"] = "block"
-		msg["text"] = text
-		start(team_id, user_id, channel_id, msg)
+		return {'blocks': text}
+
+		#msg = {}
+		#msg["type"] = "block"
+		#msg["text"] = text
+		#start(team_id, user_id, channel_id, msg)
 	if command == "/crypto_prediction":
 		text = prediction()
-		msg = {}
-		msg["type"] = "block"
-		msg["text"] = text
-		start(team_id, user_id, channel_id, msg)
+		#msg = {}
+		#msg["type"] = "block"
+		#msg["text"] = text
+		return {'blocks': text}
+
+		#start(team_id, user_id, channel_id, msg)
 
 	if command == "/crypto_bot_help":
 		text = help()
-		msg = {}
-		msg["type"] = "block"
-		msg["text"] = text
+		#msg = {}
+		#msg["type"] = "block"
+		return {'blocks': text}
 		start(team_id, user_id, channel_id, msg)
 	 
 		
