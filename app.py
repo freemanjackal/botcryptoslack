@@ -139,7 +139,7 @@ def slash_commands():
 	 
 		
 
-	return "success"
+	#return "success"
 	
 
 
