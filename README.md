@@ -10,9 +10,9 @@ https://drive.google.com/open?id=1kGSPaIgOwLmJYgPpJntMago78EsUT-Ih
 * Make conversion of a specific amount of any cryptocurrency(listed in [coinmarketcap](https://coinmarketcap.com)) to USD.
 
 ## Crypto bot commands
-The commands used by cryptobot are not slack commands. They work by mentioning the bot followed by specific keywords.
+The next commands used by cryptobot are not slack commands. They work by mentioning the bot followed by specific keywords.
 
-### Commands:
+### Mention Commands:
 1.     @crypto_bot help 
 2.     @crypto_bot prices
 3.     @crypto_bot convert [ammount] [ccoin-symbol] 
@@ -29,6 +29,12 @@ Where amount is the specified amount of any coin to USD.  ccoin-symbol is an opt
 
 4.     @crypto_bot news 
 Return 10 top news from messari.io related to cryptos
+
+### Slack commands for crypto_bot:
+1.		/crypto_bot_help
+2.		/crypto_prices
+3.		/crypto_convert [amount] [ccoin-symbol]
+4.		/crypto_news
 
 ## Future commands
 Add options like crypto predictions.
