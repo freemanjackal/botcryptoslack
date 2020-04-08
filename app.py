@@ -69,12 +69,7 @@ slash commands functions
 def slash_commands():
 
 	print("sii")
-	arguments = request.get_json()
-	print(arguments)
-	fr = request.form.get('command')
-	print(fr)
-	va = request.values
-	print(va)
+	
 
 	try:
 		text = request.form.get('text')
@@ -97,9 +92,7 @@ def slash_commands():
 	except:
 		print("command e")
 
-	print(command)
-	print(channel)
-	print(text)
+	
 
 	text = text.split()
 
