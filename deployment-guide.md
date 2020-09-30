@@ -52,13 +52,13 @@ to update it with your latest dependencies.
 
 Once this is done there is one more step to follow if you forked/cloned this repo. Create the database in postgreSql in heroku with this command.
 
-    heroku run python manage.py upgrade
+    heroku run python manage.py db upgrade
 
 ### Important
 In the case you created your own project and database you should probably need to initialize database and run migrations. Migrations folder needs to be in your repo and uploaded to git because you will need it to tell heroku to generate your database.
 
-    heroku run python manage.py init
-    heroku run pyton manage.py migrate
+    heroku run python manage.py db init
+    heroku run pyton manage.py db migrate
 
 
 
