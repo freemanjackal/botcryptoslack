@@ -274,7 +274,8 @@ def help():
 # ============== Message Events ============= #
 @slack_events_adapter.on("app_mention")
 def message(payload):
-	return payload.get("challenge")
+	# uncomment to validate events api check, comment again after that
+	#return payload.get("challenge")
 	event = payload.get("event", {})
 	team_id = payload.get("team_id")
 
