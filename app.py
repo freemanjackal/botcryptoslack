@@ -23,7 +23,7 @@ slack_events_adapter = SlackEventAdapter(os.environ['SLACK_SIGNING_SECRET'], "/s
 
 
 #dictionary to memory save tokens
-tokens = {}
+#tokens = {}
 
 
 client_id = os.environ["SLACK_CLIENT_ID"]
@@ -34,12 +34,11 @@ oauth_scope = ", ".join(["chat:write", "channels:read", "channels:join", "app_me
 
 @app.route("/begin_auth", methods=["GET"])
 def pre_install():
-	return f'<a href="https://slack.com/oauth/v2/authorize?client_id=1034315777795.1044752003316&scope=chat:write,channels:join,commands,im:history,im:write,app_mentions:read,channels:history"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"></a>'
+	return f'<a href="https://slack.com/oauth/v2/authorize?client_id='+client_id+'&scope=chat:write,channels:join,commands,im:history,im:write,app_mentions:read,channels:history"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"></a>'
 
 @app.route("/finish_auth", methods=["GET", "POST"])
 def post_install():
   # Retrieve the auth code from the request params
-	global tokens
 	auth_code = request.args['code']
 
   # An empty string is a valid token for this request
@@ -68,31 +67,27 @@ slash commands functions
 @app.route("/slash_commands", methods=["GET", "POST"])
 def slash_commands():
 
-	print("sii")
-	
-
 	try:
 		text = request.form.get('text')
 	except :
-		print("entra text error")
+		print("error text")
 	try:
 		team_id = request.form.get('team_id')
 	except:
-		print("entra team e")
+		print("error team")
 	try:
 		channel_id = request.form.get('channel_id')
 	except:
-		print("entra  channel aqui")
+		print("error chanel")
 	try:
 		user_id = request.form.get('user_id')
 	except:
-		print("entra aqui")
+		print("error user")
 	try:
 		command = request.form.get('command')
 	except:
-		print("command e")
+		print("error command")
 
-	
 
 	text = text.split()
 
@@ -100,11 +95,6 @@ def slash_commands():
 		data = get_latest_prices()
 		text = convertPrices2Msgs(data)
 		return {'blocks': text}
-
-		#msg = {}
-		#msg["type"] = "block"
-		#msg["text"] = text
-		#start(team_id, user_id, channel_id, msg)
 
 	if command == "/crypto_convert":
 		if len(text) == 2:
@@ -114,38 +104,22 @@ def slash_commands():
 			data = convert_to(float(text[0]))
 
 		text = convertCryptoSell2Msgs(data)
-		#msg = {}
-		#msg["type"] = "block"
-		#msg["text"] = text
 		return {'blocks':text}
-		#start(team_id, user_id, channel_id, msg)
+
 	if command == "/crypto_news":
 		data = get_news()
 		text = convertNews2Msgs(data)
 		return {'blocks': text}
 
-		#msg = {}
-		#msg["type"] = "block"
-		#msg["text"] = text
-		#start(team_id, user_id, channel_id, msg)
 	if command == "/crypto_prediction":
 		text = prediction()
-		#msg = {}
-		#msg["type"] = "block"
-		#msg["text"] = text
 		return {'blocks': text}
-
-		#start(team_id, user_id, channel_id, msg)
 
 	if command == "/crypto_bot_help":
 		text = help()
-		#msg = {}
-		#msg["type"] = "block"
 		return {'blocks': text}
-		start(team_id, user_id, channel_id, msg)
+		#start(team_id, user_id, channel_id, msg)
 	 
-		
-
 	return "Make a good use of it"
 	
 
@@ -180,7 +154,6 @@ def convert_to(btc_qty, crypto='btc'):
 	  'convert':'USD'
 	}
 	
-
 	session = Session()
 	session.headers.update(headers)
 
@@ -200,11 +173,6 @@ def get_news():
 		return data
 	except(ConnectionError, Timeout, TooManyRedirects) as e:
 		print(e)
-
-
-
-
-
 
 
 
@@ -304,15 +272,10 @@ def help():
 	return sections	
 
 # ============== Message Events ============= #
-# When a user sends a DM, the event type will be 'message'.
-# Here we'll link the message callback to the 'message' event.
 @slack_events_adapter.on("app_mention")
 def message(payload):
-	"""Display the onboarding welcome message after receiving a message
-	that contains "start".
-	"""
+	return payload.get("challenge")
 	event = payload.get("event", {})
-
 	team_id = payload.get("team_id")
 
 	channel_id = event.get("channel")
