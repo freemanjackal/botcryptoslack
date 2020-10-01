@@ -56,7 +56,6 @@ def post_install():
 	model.insert_token(response['team']["id"], response['access_token'])
 	#tokens[response['team']["id"]] = response['access_token']
 
-
 	# Don't forget to let the user know that auth has succeeded!
 	return "Authorization complete!"
 
@@ -118,7 +117,6 @@ def slash_commands():
 	if command == "/crypto_bot_help":
 		text = help()
 		return {'blocks': text}
-		#start(team_id, user_id, channel_id, msg)
 	 
 	return "Make a good use of it"
 	
