@@ -1,8 +1,6 @@
 # About botcryptoslack
 This is a slack bot that provide specific information about crypto markets.
 
-## Video
-https://drive.google.com/open?id=1kGSPaIgOwLmJYgPpJntMago78EsUT-Ih
 
 ## Functionalities
 * Get the latest prices of 5 cryptocurrencies (BTC, ETH, LTC, BCH,  XTZ)
